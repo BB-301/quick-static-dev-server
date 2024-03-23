@@ -1,0 +1,13 @@
+**/.DS_Store
+
+/.*
+!/.gitignore
+
+/node_modules
+**/*.js
+**/*.js.map
+
+/dist
+/*.tgz
+
+/tmp
