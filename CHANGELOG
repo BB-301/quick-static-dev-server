@@ -1,0 +1,8 @@
+# Version 1.0.1
+
+Added optional `QUICK_SERVER_CUSTOM_RESPONSE_HEADERS` environment variable
+to allow users to inject custom response headers on every response.
+
+# Version 1.0.0
+
+Initial release.

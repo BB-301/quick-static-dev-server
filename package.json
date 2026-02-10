@@ -1,6 +1,6 @@
 {
     "name": "@bb301/quick-static-dev-server",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A simple static web server (built with Express) that can be used to serve simple HTML website projects locally during development.",
     "bin": "./dist/index.js",
     "scripts": {

@@ -12,6 +12,17 @@ const QUICK_SERVER_PUBLIC_DIR_PATH: string = EnvVar.asOptionalString("QUICK_SERV
 const QUICK_SERVER_HTML_INDEX_NAME: string = EnvVar.asOptionalString("QUICK_SERVER_HTML_INDEX_NAME") ?? "index.html";
 const QUICK_SERVER_SSL_CERT_PATH: string | undefined = EnvVar.asOptionalString("QUICK_SERVER_SSL_CERT_PATH");
 const QUICK_SERVER_SSL_KEY_PATH: string | undefined = EnvVar.asOptionalString("QUICK_SERVER_SSL_KEY_PATH");
+const QUICK_SERVER_CUSTOM_RESPONSE_HEADERS: string | undefined = EnvVar.asOptionalString("QUICK_SERVER_CUSTOM_RESPONSE_HEADERS");
+
+const customHeaders: string[][] = !QUICK_SERVER_CUSTOM_RESPONSE_HEADERS ? [] : QUICK_SERVER_CUSTOM_RESPONSE_HEADERS
+    .split(",")
+    .map((keyValue: string) => {
+        const [key, value] = keyValue.trim().split(":");
+        if (!key || !value) {
+            throw new Error(`Invalid QUICK_SERVER_CUSTOM_RESPONSE_HEADERS; if present, expecting following format: 'header_1:value_1,header_2:value_2,header_3:value_3`);
+        }
+        return [key.trim(), value.trim()]
+    });
 
 const publicFilesDir = resolve(QUICK_SERVER_PUBLIC_DIR_PATH);
 const indexFilePath = resolve(join(QUICK_SERVER_PUBLIC_DIR_PATH, QUICK_SERVER_HTML_INDEX_NAME));
@@ -29,6 +40,13 @@ if (!existsSync(indexFilePath)) {
 const app = express();
 
 app.use(morgan("common"));
+
+app.use((_req, res, next) => {
+    customHeaders.forEach(([headerName, headerValue]) => {
+        res.setHeader(headerName, headerValue);
+    });
+    next();
+});
 
 app.get(`/`, (_, res) => {
     res.sendFile(indexFilePath, {

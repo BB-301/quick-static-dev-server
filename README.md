@@ -33,6 +33,7 @@ For the moment, server configurations must be done using the following optional 
 * `QUICK_SERVER_HTML_INDEX_NAME` – (default: `index.html`) The HTML file to be served for requests made to the `GET /` endpoint.
 * `QUICK_SERVER_SSL_CERT_PATH` – The path of the SSL certificate file to be used (enables HTTPS).
 * `QUICK_SERVER_SSL_KEY_PATH` – The path of the SSL private key file to be used (enables HTTPS).
+* `QUICK_SERVER_CUSTOM_RESPONSE_HEADERS` - An optional comma-separated list of header name and header value tuples to be set as response headers on every response. E.g. syntax: `x-custom-message: hello world, x-custom-value: 1234`.
 
 ### Example
 
