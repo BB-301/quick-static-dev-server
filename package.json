@@ -2,7 +2,9 @@
     "name": "@bb301/quick-static-dev-server",
     "version": "1.0.1",
     "description": "A simple static web server (built with Express) that can be used to serve simple HTML website projects locally during development.",
-    "bin": "./dist/index.js",
+    "bin": {
+        "quick-static-dev-server": "dist/index.js"
+    },
     "scripts": {
         "build": "npx tsc -p .",
         "install-cli": "npm run build && npm install -g",
@@ -17,7 +19,7 @@
     "license": "MIT",
     "homepage": "https://github.com/BB-301/quick-static-dev-server",
     "repository": {
-        "url": "https://github.com/BB-301/quick-static-dev-server",
+        "url": "git+https://github.com/BB-301/quick-static-dev-server.git",
         "type": "git"
     },
     "bugs": {
@@ -25,7 +27,8 @@
         "url": "https://github.com/BB-301/quick-static-dev-server/issues"
     },
     "files": [
-        "dist/index.js"
+        "dist/index.js",
+        "CHANGELOG"
     ],
     "devDependencies": {
         "@types/express": "^4.17.21",
